@@ -1,22 +1,45 @@
 <?php
 namespace lib;
-class Model {
+
+abstract class Model {
 	protected $table;
 	protected static $_pdo = null;
+	private static $database = null;
+	private static $host = null;
+	private static $user = null;
+	private static $password;
 	function __construct() {
-		$user = "root";
-		$password = "";
-		$database = "bet";
-		$host = "localhost";
-
-		if (self::$_pdo === null) {
-			self::$_pdo = new PDO("mysql:dbname=".$database.";host=".$host,$user,$password);
+		if (file_exists(ROOT."public/config.ini")) {
+			$row = Core::loadConfig();
+			self::$_pdo = new \PDO("mysql:dbname=".$row['dbname'].";host=".$row['host'],$row['user'],$row['password']);
+		}
+		else {
+			self::$_pdo = new \PDO("mysql:dbname=".$this->database.";host=".$this->host,$this->user,$this->password);
 		}
 	}
-	public function getUser($login) {
-		$query = self::$_pdo->prepare("SELECT * FROM user WHERE login = ?");
-		$query->execute(array($login));
-		return $query->fetch(PDO::FETCH_ASSOC);
+	public function setDatabase($database) {
+		$this->database = $database;
 	}
+	public function setHost($host) {
+		$this->host = $host;
+	}
+	public function setUser($user) {
+		$this->user = $user;
+	}
+	public function setPassword($password) {
+		$this->password = $password;
+	}
+	public function getDatabase() {
+		return $this->database;
+	}
+	public function getHost() {
+		return $this->host;
+	}
+	public function getUser() {
+		return $this->user;
+	}
+	public function getPassword() {
+		return $this->password;
+	}	
 }
 ?>

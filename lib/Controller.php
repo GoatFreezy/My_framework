@@ -1,6 +1,6 @@
 <?php 
 namespace lib;
-class Controller{
+abstract class Controller{
 	protected $data = array();
 	protected $layout = 'index';
 	function __construct(){
@@ -28,6 +28,11 @@ class Controller{
 		} else {
 			require('views/layout/'.$this->layout.'.php');
 		}
+	}
+	function loadModel($name){
+		$model = explode("\\",$name);
+		require_once(ROOT.'app/models/'.(end($model)).'Model.php');
+		return $this->$name = new $name();
 	}
 	public function templating($data,$content_for_layout){
 		foreach ($data as $key => $value) {
