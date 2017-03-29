@@ -5,10 +5,11 @@ class Index extends \lib\Controller {
 	
 	public function index() {
 		$model = $this->loadModel('app\models\Index');
-		$model->setDatabase('asd');
-		$model->setPassword('base');
-		$model->setHost('base');
-		$model->setUser('base');
-		$this->render('index',["login" => "BONJOUR"]);
+		$model->setTable('user');
+		$model->Create(array('login' => 'Goat','nom' => 'bonjour' , 'mdp' => '123'));
+		$model->Read(['login' => 'Goat','mdp' => '123']);
+		$model->Update(['login' => 'Goat'],['login' => 'Text']);
+		$model->Delete(["login" => "text"]);
+		$this->render('index',["login" => "BONJOUR" , 'test' => 'I got you']);
 	}
 }

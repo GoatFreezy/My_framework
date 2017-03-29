@@ -14,15 +14,24 @@ abstract class Controller{
 		$this->layout = $var;
 	}
 	public function render($filename, $data = []){
-		if (is_null($data) || $data == '') {
-			$data = [];
-		}
-		extract($data);
-		ob_start();
-		$controller = explode('\\',get_class($this))[2];
-		require('../public/views/'.$controller.'/'.$filename.'.php');
-		$content_for_layout = ob_get_clean();
-		$content_for_layout = $this->templating($data,$content_for_layout);
+		// if (is_null($data) || $data == '') {
+		// 	$data = [];
+		// }
+		// extract($data);
+		// ob_start();
+		// $controller = explode('\\',get_class($this))[2];
+		// require('../public/views/'.$controller.'/'.$filename.'.php');
+		// $content_for_layout = ob_get_clean();
+		// $content_for_layout = $this->templating($data,$content_for_layout);
+		// if($this->layout==false){
+		// 	echo $content_for_layout;
+		// } else {
+		// 	require('views/layout/'.$this->layout.'.php');
+		// }
+		$controller = strtolower(explode('\\',get_class($this))[2]);
+		$loader = new \Twig_Loader_Filesystem('views/'.$controller.'/');
+		$twig = new \Twig_Environment($loader);
+		$content_for_layout = $twig->render($filename.'.php',$data);
 		if($this->layout==false){
 			echo $content_for_layout;
 		} else {

@@ -9,6 +9,7 @@ Class Core {
 		define('ROOT',str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']."../"));
 		require(ROOT.'lib/Model.php');
 		require(ROOT.'lib/Controller.php');
+		include_once('vendor/autoload.php');
 		$params = explode('/',$_GET['p']);
 		$controller = !empty($params[0]) ? $params[0] : 'index';
 		$action = isset($params[1]) ? $params[1] : 'index';

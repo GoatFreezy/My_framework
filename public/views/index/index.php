@@ -5,5 +5,6 @@
 </head>
 <body>
 <p>{{ login }}</p>
+<p>{{ test }}</p>
 </body>
 </html>
