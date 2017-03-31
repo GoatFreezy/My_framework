@@ -34,8 +34,7 @@ Class Core {
 
 	}
 	static function loadConfig() {
-		$config = parse_ini_file("config.ini");
-		return $config;
+		return $config = parse_ini_file("config.ini");
 	}
 	static function autoload($class){
 		$class = explode("\\",$class);

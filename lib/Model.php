@@ -11,6 +11,7 @@ abstract class Model {
 	function __construct() {
 		if (file_exists(ROOT."lib/config.ini")) {
 			$row 	= Core::loadConfig();
+			var_dump($row);
 			self::$_pdo = new \PDO("mysql:dbname=".$row['dbname'].";host=".$row['host'],$row['user'],$row['password']);
 		}
 		// else {
