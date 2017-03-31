@@ -4,8 +4,8 @@
 	<title>Haloha</title>
 </head>
 <body>
-{% for login in var %}
-    {{ login }}
+{% for user in users %}
+    {{ user }}
 {% else %}
     No login have been found.
 {% endfor %}

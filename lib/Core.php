@@ -14,8 +14,7 @@ Class Core {
 		$controller = !empty($params[0]) ? $params[0] : 'index';
 		$action = isset($params[1]) ? $params[1] : 'index';
 		if (!file_exists(ROOT.'app/controllers/'.$controller.'Controller.php')){
-			// require_once('error404.php');
-			echo "404";
+			require_once(ROOT.'lib/error404.php');
 		}
 		else{
 			if(file_exists(ROOT.'app/controllers/' . $controller . 'Controller.php')){
@@ -29,7 +28,7 @@ Class Core {
 			unset($params[1]);
 			call_user_func_array(array($controller,$action),$params);
 		} else {
-			// require_once('error404.php') ;
+			require_once('error404.php') ;
 		}
 
 	}

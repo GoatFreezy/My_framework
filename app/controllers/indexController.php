@@ -11,7 +11,7 @@ class Index extends \lib\Controller {
 		// $model->Update(['login' => 'Goat'],['login' => 'Text']);
 		// $model->Delete(["login" => "text"]);
 		$var = ["users" => ["BONJOUR","ELLE"]];	
-		$var = $model->get();
+		// $var = $model->get();
 		$this->render('index',$var);
 	}
 }

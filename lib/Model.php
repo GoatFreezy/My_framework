@@ -10,13 +10,12 @@ abstract class Model {
 	private static $password;
 	function __construct() {
 		if (file_exists(ROOT."lib/config.ini")) {
-			$row 	= Core::loadConfig();
-			var_dump($row);
+			$row = Core::loadConfig();
 			self::$_pdo = new \PDO("mysql:dbname=".$row['dbname'].";host=".$row['host'],$row['user'],$row['password']);
 		}
-		// else {
-			// self::$_pdo = new \PDO("mysql:dbname=".$this->database.";host=".$this->host,$this->user,$this->password);
-		// }
+		else {
+			self::$_pdo = new \PDO("mysql:dbname=".$this->database.";host=".$this->host,$this->user,$this->password);
+		}
 	}
 	public function setTable($table) {
 		$this->table = $table;

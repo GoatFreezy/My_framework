@@ -1,0 +1,1 @@
+<img src="public/404-error-blog.jpg" alt="Error 404">
