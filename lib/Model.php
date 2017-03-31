@@ -11,10 +11,15 @@ abstract class Model {
 	function __construct() {
 		if (file_exists(ROOT."lib/config.ini")) {
 			$row = Core::loadConfig();
-			self::$_pdo = new \PDO("mysql:dbname=".$row['dbname'].";host=".$row['host'],$row['user'],$row['password']);
+			$this->database = $row['database'];
+			$this->host = $row['host'];
+			$this->user = $row['user'];
+			$this->password = $row['password'];
 		}
-		else {
+		try {
 			self::$_pdo = new \PDO("mysql:dbname=".$this->database.";host=".$this->host,$this->user,$this->password);
+		}  catch (Exception $e) {
+			echo 'Exception reçue : ',  $e->getMessage(), "\n";
 		}
 	}
 	public function setTable($table) {
