@@ -29,13 +29,13 @@ abstract class Controller{
 		// 	require('views/layout/'.$this->layout.'.php');
 		// }
 		$controller = strtolower(explode('\\',get_class($this))[2]);
-		$loader = new \Twig_Loader_Filesystem('views/'.$controller.'/');
+		$loader = new \Twig_Loader_Filesystem('../app/views/'.$controller.'/');
 		$twig = new \Twig_Environment($loader);
 		$content_for_layout = $twig->render($filename.'.php',$data);
 		if($this->layout==false){
 			echo $content_for_layout;
 		} else {
-			require('views/layout/'.$this->layout.'.php');
+			require(ROOT.'app/views/layout/'.$this->layout.'.php');
 		}
 	}
 	function loadModel($name){
@@ -49,6 +49,9 @@ abstract class Controller{
 			$content_for_layout = preg_replace($regex,$value,$content_for_layout);
 		}
 		return $content_for_layout;
+	}
+	public function getParam($param) {
+		return $_GET[$param];
 	}
 }
 ?>	

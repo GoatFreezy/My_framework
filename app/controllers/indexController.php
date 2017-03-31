@@ -6,10 +6,13 @@ class Index extends \lib\Controller {
 	public function index() {
 		$model = $this->loadModel('app\models\Index');
 		$model->setTable('user');
-		$model->Create(array('login' => 'Goat','nom' => 'bonjour' , 'mdp' => '123'));
-		$model->Read(['login' => 'Goat','mdp' => '123']);
-		$model->Update(['login' => 'Goat'],['login' => 'Text']);
-		$model->Delete(["login" => "text"]);
-		$this->render('index',["login" => "BONJOUR" , 'test' => 'I got you']);
+		// $model->Create(array('login' => 'Goat','nom' => 'bonjour' , 'mdp' => '123'));
+		// $model->Read(['login' => 'Goat','mdp' => '123']);
+		// $model->Update(['login' => 'Goat'],['login' => 'Text']);
+		// $model->Delete(["login" => "text"]);
+		$var = ["users" => ["BONJOUR","ELLE"]];	
+		$var = $model->get();
+		// var_dump($var);
+		$this->render('index',$var);
 	}
 }

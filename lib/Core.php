@@ -34,7 +34,7 @@ Class Core {
 
 	}
 	static function loadConfig() {
-		$config = parse_ini_file(ROOT."public/config.ini");
+		$config = parse_ini_file("config.ini");
 		return $config;
 	}
 	static function autoload($class){
